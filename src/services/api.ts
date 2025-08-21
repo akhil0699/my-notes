@@ -31,6 +31,7 @@ export interface SubjectResponse {
 
 export interface CreateSubjectRequest {
   subject_name: string;
+  course_id: number;
   file: File | null;
 }
 
@@ -145,6 +146,7 @@ class ApiService {
   async createSubject(data: CreateSubjectRequest): Promise<string> {
     const formData = new FormData();
     formData.append('subject_name', data.subject_name);
+    formData.append('course_id', data.course_id.toString());
     
     if (data.file) {
       formData.append('file', data.file);
