@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://internal-verbally-man.ngrok-free.app';
+const API_BASE_URL = 'https://internal-verbally-man.ngrok-free.app';
 
 export interface CourseResponse {
   course_name: string;
