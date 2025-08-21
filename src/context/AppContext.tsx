@@ -196,7 +196,7 @@ interface AppContextType {
   fetchSubjects: (courseId?: string) => Promise<void>;
   fetchContents: (subjectId?: number) => Promise<void>;
   createCourse: (courseName: string, file: File | null) => Promise<void>;
-  createSubject: (subjectName: string, file: File | null) => Promise<void>;
+  createSubject: (subjectName: string, courseId: number, file: File | null) => Promise<void>;
   createContent: (data: { title: string; text?: string; subjectId: number; pdf?: File | null; image?: File | null }) => Promise<{ success: boolean; title: string } | undefined>;
   updateContent: (contentId: number, data: { title: string; text?: string; subjectId: number; pdf?: File | null; image?: File | null }) => Promise<void>;
   deleteCourse: (courseId: number) => Promise<void>;
@@ -283,15 +283,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [fetchCourses]);
 
   // Create subject via API
-  const createSubject = useCallback(async (subjectName: string, file: File | null) => {
+  const createSubject = useCallback(async (subjectName: string, courseId: number, file: File | null) => {
     try {
       dispatch({ type: 'SET_LOADING', payload: true });
       dispatch({ type: 'SET_ERROR', payload: null });
       
-      await apiService.createSubject({ subject_name: subjectName, file });
+      await apiService.createSubject({ subject_name: subjectName, course_id: courseId, file });
       
       // Refresh subjects after creation
-      await fetchSubjects();
+      await fetchSubjects(courseId.toString());
     } catch (error) {
       console.error('Failed to create subject:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Failed to create subject' });

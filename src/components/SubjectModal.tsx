@@ -18,16 +18,18 @@ const SubjectModal: React.FC<SubjectModalProps> = ({ isOpen, onClose, courseId, 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (subject) {
-      setName(subject.name);
-      setPreviewUrl(subject.image);
-      setFile(null);
-    } else {
-      setName('');
-      setFile(null);
-      setPreviewUrl('');
+    if (isOpen) {
+      if (subject) {
+        setName(subject.name);
+        setPreviewUrl(subject.image);
+        setFile(null);
+      } else {
+        setName('');
+        setFile(null);
+        setPreviewUrl('');
+      }
     }
-  }, [subject]);
+  }, [subject, isOpen]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -53,7 +55,7 @@ const SubjectModal: React.FC<SubjectModalProps> = ({ isOpen, onClose, courseId, 
 
     try {
       setIsSubmitting(true);
-      await createSubject(name.trim(), file);
+      await createSubject(name.trim(), parseInt(courseId), file);
       onClose();
     } catch (error) {
       console.error('Failed to create subject:', error);

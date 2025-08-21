@@ -17,16 +17,18 @@ const CourseModal: React.FC<CourseModalProps> = ({ isOpen, onClose, course }) =>
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    if (course) {
-      setName(course.name);
-      setPreviewUrl(course.image);
-      setFile(null);
-    } else {
-      setName('');
-      setFile(null);
-      setPreviewUrl('');
+    if (isOpen) {
+      if (course) {
+        setName(course.name);
+        setPreviewUrl(course.image);
+        setFile(null);
+      } else {
+        setName('');
+        setFile(null);
+        setPreviewUrl('');
+      }
     }
-  }, [course]);
+  }, [course, isOpen]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
