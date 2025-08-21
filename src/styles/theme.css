@@ -1,0 +1,29 @@
+@tailwind components;
+
+@layer components {
+  .card-lg {
+    @apply rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6;
+  }
+
+  .pill {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-medium shadow-sm;
+  }
+
+  .icon-btn {
+    @apply flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors;
+  }
+
+  .progress-bar {
+    @apply w-full h-2 bg-gray-200 rounded-full overflow-hidden;
+  }
+  .progress-bar > div {
+    @apply h-full bg-primary-500 transition-all;
+  }
+
+  .avatar-stack {
+    @apply flex -space-x-3;
+  }
+  .avatar-stack img {
+    @apply w-8 h-8 rounded-full ring-2 ring-white dark:ring-gray-800;
+  }
+}
