@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const API_BASE_URL = 'https://internal-verbally-man.ngrok-free.app';
+const API_BASE_URL = 'https://my-notes-backend-t5xa.onrender.com';
 
 export interface CourseResponse {
   course_name: string;
